@@ -75,15 +75,8 @@ def update_bullets(ai_settings, screen, ship, aliens, bullets):
             bullets.remove(bullet)
             # print(len(bullets))
 
-    #Check for any bullets that have hit aliens.
-    #If so, get rid of the bullet and the alien.
-    collisions = pygame.sprite.groupcollide(bullets, aliens, True, True)
-    #Note: to make a high powered bullet, set first Boolean argument to False so it can hit multiple aliens
+    check_bullet_alien_collisions(ai_settings, screen, ship, aliens, bullets)
 
-    if len(aliens)==0:
-        #Destroy existing bullets and create a new fleet.
-        bullets.empty()
-        create_fleet(ai_settings, screen, ship, aliens)
 
 def fire_bullet(ai_settings, screen, ship, bullets):
     """Fire a bullet if limit not reached yet"""
@@ -145,3 +138,15 @@ def update_aliens(ai_settings, aliens):
     """
     check_fleet_edges(ai_settings, aliens)
     aliens.update()
+
+def check_bullet_alien_collisions(ai_settings, screen, ship, aliens, bullets):
+    """Respond to bullet-alien collisions."""
+    #Check for any bullets that have hit aliens.
+    #If so, remove any bullets and aliens that have collided.
+    collisions = pygame.sprite.groupcollide(bullets, aliens, True, True)
+    #Note: to make a high powered bullet, set first Boolean argument to False so it can hit multiple aliens
+
+    if len(aliens)==0:
+        #Destroy existing bullets and create a new fleet.
+        bullets.empty()
+        create_fleet(ai_settings, screen, ship, aliens)
