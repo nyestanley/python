@@ -45,3 +45,12 @@ class Ship():
         # Update rect object from self.center
         self.rect.centerx = self.centerx
         self.rect.centery = self.centery
+
+    def center_ship(self):
+        #self.centerx = self.screen_rect.centerx
+        #self.centery = 650
+        #self.centery = self.screen_rect.bottom
+        self.rect.centerx = self.screen_rect.centerx
+        self.rect.bottom = self.screen_rect.bottom
+        self.centerx = float(self.rect.centerx)
+        self.centery = float(self.rect.centery)
