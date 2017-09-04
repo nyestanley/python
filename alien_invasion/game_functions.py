@@ -170,4 +170,4 @@ def ship_hit(ai_settings, stats, screen, ship, aliens, bullets):
     ship.center_ship()
 
     #Pause
-    sleep(0.5)
+    sleep(1)
