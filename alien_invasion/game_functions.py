@@ -175,6 +175,7 @@ def check_bullet_alien_collisions(ai_settings, screen, ship, aliens, bullets):
     if len(aliens)==0:
         #Destroy existing bullets and create a new fleet.
         bullets.empty()
+        ai_settings.increase_speed()
         create_fleet(ai_settings, screen, ship, aliens)
 
 def check_aliens_bottom(ai_settings, stats, screen, ship, aliens, bullets):
