@@ -179,6 +179,7 @@ def check_bullet_alien_collisions(ai_settings, screen, stats, sb, ship, aliens, 
         for aliens in collisions.values():
             stats.score += ai_settings.alien_points * len(aliens)
             sb.prep_score()
+        check_high_score(stats, sb)
 
     if len(aliens)==0:
         #Destroy existing bullets and create a new fleet.
@@ -222,10 +223,11 @@ def check_play_button(ai_settings, screen, stats, play_button, ship, aliens, bul
     if button_clicked and not stats.game_active:
         #Reset the game settings.
         ai_settings.initialize_dynamic_settings()
+        # Reset the game statistics.
+        stats.reset_stats()
         #Hide the mouse cursor
         pygame.mouse.set_visible(False)
-        #Reset the game statistics.
-        stats.reset_stats()
+
         stats.game_active = True
 
         #Empty the list of the aliens and bullets.
@@ -235,4 +237,10 @@ def check_play_button(ai_settings, screen, stats, play_button, ship, aliens, bul
         #Create a new fleet and center the ship
         create_fleet(ai_settings, screen, ship, aliens)
         ship.center_ship()
+
+def check_high_score(stats, sb):
+    """Check to see of there's a new high score."""
+    if stats.score > stats.high_score:
+        stats.high_score = stats.score
+        sb.prep_high_score()
 
